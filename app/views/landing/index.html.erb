@@ -5,16 +5,15 @@ body {
   padding-bottom: 60px;
   background-color: #EDECDF;
 }
-
 </style>
 
 <div class="container">
 <h1>Historians</h1>
 
 
-<div class="form-inline">
+<div class="form-inline" class="form-group has-search">
     <i class="fas fa-search" aria-hidden="true"></i>
-    <div id="search-box" class="search_input">
+    <div id="search-box" class="search_input" class="form-control">
     <!-- SearchBox widget will appear here -->
     </div>
 </div>
@@ -174,20 +173,21 @@ search.addWidget(
       container: '#search-box',
       placeholder: 'Search for Historians',
       magnifier: true,
-      cssClasses: {class: "form-control mr-sm-2" },
+      autocomplete: "on",
+      cssClasses: {
+        class: "form-control" 
+        },
     })
   );
 
-  /*
   search.addWidget(
     instantsearch.widgets.rangeSlider({
       container: '#date-born',
-      attributeName: 'date_born',
+      attributeName: 'date_died',
       pips: false,
       tooltips: {format: function(rawValue) {return parseInt(rawValue)}}
     })
-    );
-    */
+  );
 
   // initialize hits widget
   search.addWidget(
