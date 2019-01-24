@@ -1,0 +1,226 @@
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.10.4/dist/instantsearch.min.css">
+<script src="https://cdn.jsdelivr.net/npm/instantsearch.js@2.10.4"></script>
+<style>
+body {
+  padding-bottom: 60px;
+  background-color: #EDECDF;
+}
+
+</style>
+
+<div class="container">
+<h1>Historians</h1>
+
+
+<div class="form-inline">
+    <i class="fas fa-search" aria-hidden="true"></i>
+    <div id="search-box" class="search_input">
+    <!-- SearchBox widget will appear here -->
+    </div>
+</div>
+
+
+
+<div id="map">
+  <!-- RefinementList widget will appear here -->
+</div>
+
+<div id="clear-all">
+  <!-- ClearAll widget will appear here -->
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+     
+     <div class="card">
+       <div class="card-header">
+          Home Country
+       </div>
+        <div class="card-body">
+          <div id="home-country"></div>
+        </div>
+      </div>
+
+      <br>
+      <br>
+
+       <div class="card">
+        <div class="card-header">
+            Place Died
+        </div>
+        <div class="card-body">
+          <div id="place-died"></div>
+        </div>
+      </div>
+      
+      <div id="stats">
+        <!-- RefinementList widget will appear here -->
+      </div>
+
+      <div id="current-refined-values">
+        <!-- CurrentRefinedValues widget will appear here -->
+      </div>
+      <br>
+      <br>
+      
+      <div class="card">
+        <div class="card-header">
+          Date Born
+        </div>
+        <div class="card-body">
+         <div id="date-born"></div>
+        </div>
+      </div>
+
+
+    </div>
+
+
+    <div class="col-md-8">
+      <div id="hits">
+        <!-- Hits widget will appear here -->
+      </div>
+    </div>
+</div>
+
+<div id="pagination">
+  <!-- Pagination widget will appear here -->
+</div>
+
+<script>
+
+hitTemplate =  
+  '<a href="http://localhost:3000/historians/{{{id}}}">' +
+  '<div class="card text-center">'+
+    '<div class="card-header"> Born: {{{_highlightResult.date_born.value }}}</div>'+
+    '<div class="card-body">'+
+      '<h5 class="card-title">{{{_highlightResult.name.value }}}</h5>'+
+      '<p class="card-text">Home Country: {{{_highlightResult.home_country.value }}}</p>'+
+      '<p class="card-text">Place Died: {{{_highlightResult.place_died.value }}}</p>'+
+      '<br>'+
+      '<a href="http://localhost:3000/historians/{{{id}}}" class="btn btn-primary">View Historian</a>'+
+    '</div>'+
+    '<div class="card-footer text-muted"> Createed: 2 days ago </div>'+
+  '</div>'+
+  '</a>'+
+  '<br>'+
+  '<br>';
+
+const search = instantsearch({
+  appId: 'HEV7639QXK',
+  apiKey: '4a2f2212cd00b332549d7a7f869b71d9',
+  indexName: 'Historian',
+  routing: true
+});
+
+search.addWidget(
+  instantsearch.widgets.stats({
+    container: '#stats'
+  })
+);
+
+  // initialize currentRefinedValues
+  search.addWidget(
+    instantsearch.widgets.currentRefinedValues({
+      container: '#current-refined-values',
+      // This widget can also contain a clear all link to remove all filters,
+      // we disable it in this example since we use `clearAll` widget on its own.
+      clearAll: false
+    })
+  );
+
+  // initialize RefinementList
+  search.addWidget(
+    instantsearch.widgets.refinementList({
+      container: '#home-country',
+      attributeName: 'home_country',
+      operator: 'and',
+      limit: 10,
+      cssClasses: {
+        count: 'badge badge-primary badge-pill',
+        active: 'active'
+      }
+    })
+  );
+
+  search.addWidget(
+    instantsearch.widgets.refinementList({
+      container: '#place-died',
+      attributeName: 'place_died',
+      operator: 'and',
+      limit: 10,
+      cssClasses: {
+        count: 'badge badge-primary badge-pill',
+        active: 'active'
+      }
+    })
+  );
+
+  search.addWidget(
+    instantsearch.widgets.refinementList({
+      container: '#date-born',
+      attributeName: 'date_born',
+      limit: 10,
+      cssClasses: {
+        count: 'badge badge-primary badge-pill',
+        active: 'active'
+      }
+    })
+  );
+
+  // initialize SearchBox
+  search.addWidget(
+    instantsearch.widgets.searchBox({
+      container: '#search-box',
+      placeholder: 'Search for Historians',
+      magnifier: true,
+      cssClasses: {class: "form-control mr-sm-2" },
+    })
+  );
+
+  /*
+  search.addWidget(
+    instantsearch.widgets.rangeSlider({
+      container: '#date-born',
+      attributeName: 'date_born',
+      pips: false,
+      tooltips: {format: function(rawValue) {return parseInt(rawValue)}}
+    })
+    );
+    */
+
+  // initialize hits widget
+  search.addWidget(
+    instantsearch.widgets.hits({
+      container: '#hits',
+      templates: {
+        empty: 'No results',
+        item: hitTemplate
+      }
+    })
+  );
+
+
+  // initialize clearAll
+  search.addWidget(
+    instantsearch.widgets.clearAll({
+      container: '#clear-all',
+      templates: {
+        link: 'Reset everything'
+      },
+      autoHideContainer: false
+    })
+  );
+
+  search.addWidget(
+    instantsearch.widgets.pagination({
+      container: '#pagination',
+      maxPages: 20,
+      // default is to scroll to 'body', here we disable this behavior
+      scrollTo: false
+    })
+  );
+
+
+  search.start();
+</script>

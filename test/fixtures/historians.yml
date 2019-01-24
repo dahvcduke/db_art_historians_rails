@@ -1,0 +1,35 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  historian_id: 1
+  name: MyString
+  date_born: MyString
+  place_born: MyString
+  date_died: MyString
+  place_died: MyString
+  overview: MyString
+  home_country: MyString
+  sources: MyString
+  bibliography: MyString
+  other_names: MyString
+  notes: MyString
+  gender: MyString
+  subject_area: MyString
+  path: MyString
+
+two:
+  historian_id: 1
+  name: MyString
+  date_born: MyString
+  place_born: MyString
+  date_died: MyString
+  place_died: MyString
+  overview: MyString
+  home_country: MyString
+  sources: MyString
+  bibliography: MyString
+  other_names: MyString
+  notes: MyString
+  gender: MyString
+  subject_area: MyString
+  path: MyString

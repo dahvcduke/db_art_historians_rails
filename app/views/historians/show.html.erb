@@ -1,0 +1,18 @@
+<div class="container">
+<br>
+<br>
+<br>
+<div class="card">
+  <h5 class="card-header"><%= @historian.name %></h5>
+  <div class="card-body">
+    <h5 class="card-title">Born:  <%= @historian.place_born %></h5>
+    <h5 class="card-title">Died:  <%= @historian.place_died %>, <%= @historian.date_died %></h5>
+    <h5 class="card-title">Home Country: <%= @historian.home_country %></h5>
+    <h5 class="card-title">Subject Area: <%= @historian.subject_area %></h5>
+    <p class="card-text"><b>Overview:</b> <%= @historian.overview %></p>
+    <p class="card-text"><b>Source:</b> <%= @historian.sources %></p>
+    <p class="card-text"><b>Bibliography:</b> <%= @historian.bibliography %></p>
+  </div>
+</div>
+<%= link_to 'Back', historians_path %>
+</div>

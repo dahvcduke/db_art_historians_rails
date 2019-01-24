@@ -1,0 +1,92 @@
+<%= form_with(model: historian, local: true) do |form| %>
+  <% if historian.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(historian.errors.count, "error") %> prohibited this historian from being saved:</h2>
+
+      <ul>
+      <% historian.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :historian_id %>
+    <%= form.number_field :historian_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :date_born %>
+    <%= form.text_field :date_born %>
+  </div>
+
+  <div class="field">
+    <%= form.label :place_born %>
+    <%= form.text_field :place_born %>
+  </div>
+
+  <div class="field">
+    <%= form.label :date_died %>
+    <%= form.text_field :date_died %>
+  </div>
+
+  <div class="field">
+    <%= form.label :place_died %>
+    <%= form.text_field :place_died %>
+  </div>
+
+  <div class="field">
+    <%= form.label :overview %>
+    <%= form.text_field :overview %>
+  </div>
+
+  <div class="field">
+    <%= form.label :home_country %>
+    <%= form.text_field :home_country %>
+  </div>
+
+  <div class="field">
+    <%= form.label :sources %>
+    <%= form.text_field :sources %>
+  </div>
+
+  <div class="field">
+    <%= form.label :bibliography %>
+    <%= form.text_field :bibliography %>
+  </div>
+
+  <div class="field">
+    <%= form.label :other_names %>
+    <%= form.text_field :other_names %>
+  </div>
+
+  <div class="field">
+    <%= form.label :notes %>
+    <%= form.text_field :notes %>
+  </div>
+
+  <div class="field">
+    <%= form.label :gender %>
+    <%= form.text_field :gender %>
+  </div>
+
+  <div class="field">
+    <%= form.label :subject_area %>
+    <%= form.text_field :subject_area %>
+  </div>
+
+  <div class="field">
+    <%= form.label :path %>
+    <%= form.text_field :path %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
