@@ -1,3 +1,7 @@
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<style>
+</style>
+<div class="container">
 <ul class='breadcrumb'>
   <li class='active'><a href='<%= @doc[:doc_url] %><%= @doc[:link_extension] %>'><%= @doc[:name] %> <%= @doc[:resources].values.first && @doc[:resources].values.first[:version] %></a></li>
   <%= render(:partial => "languages", :locals => {:doc_url => @doc[:doc_url]}) %>
@@ -8,9 +12,18 @@
   <% end %>
 </ul>
 
-<div><%= raw @doc[:info] %></div>
 
-<h1 class='page-header'><%= t('apipie.resources') %></h1>
+
+<br>
+<h1>Dictionary of Art Historians API</h1>
+<h4>Welcome! This is the API for the Dictionary of Art Historians Project.</h4> 
+<br>
+<h4>The Dictionary of Art Historians is a biographical database of western art historians. It stands as afree, scholarly resource for scholars, students, and publics and is continually updated. 
+This API has been developed to allow historians, developers, and technologists to explore and build off of this resource</h4>
+<br>
+<h4>The API allow for bulk downloads, query searches, and as a backend for web and mobile applications for other research teams. For a resource list, and direction for querying the database, please see below</h4>
+<br>
+<br>
 
 <% @doc[:resources].sort_by(&:first).each do |key, api| %>
   <h2>
@@ -23,8 +36,8 @@
     <br>
     <small><%= api[:short_description] %></small>
   </h2>
-  <table class='table'>
-    <thead>
+  <table class="table table-striped">
+    <thead class="thead-dark">
       <tr>
         <th><%= t('apipie.resource') %></th>
         <th><%= t('apipie.description') %></th>
@@ -51,6 +64,34 @@
   </table>
 <% end %>
 
+<div class="card">
+  <div class="card-body">
+   <h4>Q: How do I query for all of the historians in the database?</h4>   
+   <h5>A: curl http://localhost:3000/historians.json | json_pp</h4>
+  </div>
+</div>
+<div class="card">
+  <div class="card-body">
+  <h4>Q: How do a single historian in the database?</h4> 
+  <h5>A: curl http://localhost:3000/historians/30.json | json_pp</h4>
+  </div>
+</div>
+<div class="card">
+  <div class="card-body">
+  <h4>Q: How do I search for a historians by name like...this name?</h4> 
+  <h5>A: curl -G -H "Content-type: application/json" -d "q={\"filters\":[{\"name\":\"name\",\"op\":\"like\",\"val\":\"%Frederick%\"}]}" http://localhost:3000/historians.json | json_pp</h4>
+  </div>
+</div>
+<div class="card">
+  <div class="card-body">
+  <h4>Q: How do I search for a historian by country?</h4> 
+  <h5>A: curl -X GET 'http://localhost:3000/historians.json?home_country=Germany' | json_pp</h4>
+  </div>
+</div>
+
+
+
 <% unless content_for(:apipie_footer) == @doc[:copyright] %>
   <%= content_for :apipie_footer, raw(@doc[:copyright]) %>
 <% end %>
+</div>
