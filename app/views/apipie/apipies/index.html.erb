@@ -9,18 +9,6 @@ body {
 }
 </style>
 <div class="container">
-<ul class='breadcrumb'>
-  <li class='active'><a href='<%= @doc[:doc_url] %><%= @doc[:link_extension] %>'><%= @doc[:name] %> <%= @doc[:resources].values.first && @doc[:resources].values.first[:version] %></a></li>
-  <%= render(:partial => "languages", :locals => {:doc_url => @doc[:doc_url]}) %>
-  <% if @versions && @versions.size > 1 %>
-  <li class='pull-right'>
-    <%= @versions.collect { |v| link_to v, Apipie.full_url(v+@doc[:link_extension]) }.join(' / ').html_safe %>
-  </li>
-  <% end %>
-</ul>
-
-
-
 <div class="jumbotron fill">
   <h1 class="display-4">Dictionary of Art Historians API</h1>
   <h4 class="lead">Welcome! This is the API for the Dictionary of Art Historians Project.</h4>
